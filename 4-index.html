@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <h4 :style="styleSection" :title='title'>Speed of sound</h4>
+            <h3 v-bind:class='className'>Speed of light</h3>
+            <h3 v-bind:class="{ 'alert alert-success' : isActive, 'col-lg-6' : isMin }">Speed of light</h3>
+            <h3 :class="[isActive ? 'alert alert-success' : 'alert alert-danger']">Speed of lion</h3:c>
+        </div>
+    </div>
+
+    <script>
+        new Vue ({
+            el : '#app',
+            data : {
+                styleSection : {
+                    color : 'red', 
+                    border : '1px solid black'
+                },
+                title:'This is title',
+                className :'alert alert-success',
+                isActive : true,
+                isMin : true
+            }
+        });
+    </script>
+</body>
+</html>

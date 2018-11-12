@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <p>Display data from Vue</p>
+            <h1>{{message}}</h1>
+
+            <p>Split and Reverse Data</p>
+            <h1>{{message.split('').reverse().join('')}}</h1>
+            
+            <p>Split and Reverse Data by using methods</p>
+            <h1>{{reverse('new')}}</h1>
+
+            <p>Split and Reverse Data by using computed</p>
+            <h1>{{reverseData}}</h1>
+
+            <p>Computed vs Methods (Method calls every time)</p>
+            <h1>Methods {{reverseM()}}</h1>
+            <h1>Computed {{reverseC}}</h1>
+            <h1>Methods {{reverseM()}}</h1>
+            <h1>Methods {{reverseM()}}</h1>
+            <h1>Methods {{reverseM()}}</h1>
+            <h1>Methods {{reverseM()}}</h1>
+
+            <p>Km to m using watch</p>
+            <input type="text" v-model='km'>
+            <input type="text" v-model='m'>
+
+            <p>Getter and Setter</p>
+            <input type="text" v-model='fullName'>
+            <h3>{{ firstName }}</h3>
+            <h3>{{ lastName }}</h3>
+        </div>
+    </div>
+
+    <script>
+        new Vue ({
+            el : '#app',
+            data : {
+                message : 'demo',
+                km : 0,
+                m : 0,
+                firstName : 'sanjay',
+                lastName : 'patel'
+            },
+            methods:{
+                reverse:function(message){
+                    return message.split('').reverse().join('')
+                },
+
+                reverseM:function()
+                {
+                    return Date.now();
+                },
+
+                
+            },
+            computed:{
+                reverseData:function(){
+                    return this.message.split('').reverse().join('')
+                },
+
+                reverseC:function()
+                {
+                    return Date.now();
+                },
+
+                fullName : {
+                    //Getter
+                    get : function(){
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    
+                    //Setter
+                    set : function(name){
+                        name = name.split(' ');
+                        this.firstName = name[0];
+                        this.lastName = name[1];
+                        //this.lastName = name[name.length - 1];
+                    },
+                },
+            },
+            watch:{
+                km : function(val){
+                    this.km = val;
+                    this.m = val * 1000;
+                },
+                m : function(val){
+                    this.km = val / 1000;
+                    this.m = val; 
+                },
+            },
+        });
+    </script>
+</body>
+</html>

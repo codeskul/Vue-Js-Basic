@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <p>onClick and onClick Once</p>
+            <a @click='click' class="btn btn-info">Add</a>
+            <a @click.once='click' class="btn btn-info">Add Once</a>
+            <span>{{total}}</span>
+            <br><br>
+            <p>Submit prevent</p>
+            <form action='abc.php'>
+                <!-- <form action='abc.php' v-on:submit.prevent> -->
+                <!-- <input type="submit" class="btn">  Above or this below to submit prevent-->
+                <!-- <input type="submit" class="btn" @click.submit.prevent> -->
+                
+                <input type="submit" class="btn" @click.submit.prevent.alt="alert">
+            </form>
+
+            <br><br>
+            <div class="col-lg-offset-4 col-lg-4">
+                <ul class="list-group">
+                    <li v-for="fruit in fruits" @click="add(fruit)" :class="fruit.class" class="list-group-item d-flex justify-content-between align-items-center">
+                      {{fruit.name}}
+                      <span class="badge badge-primary badge-pill">{{fruit.cost}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total
+                        <span class="badge badge-primary badge-pill">{{total}}</span>
+                      </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue ({
+            el : '#app',
+            data:{
+                total : 0,
+                fruits:[
+                    {name:'appel',cost:10,clicked:false,class:'unselect'},
+                    {name:'mango',cost:20,clicked:false,class:'unselect'},
+                    {name:'banana',cost:30,clicked:false,class:'unselect'}
+             ]
+            },
+            methods:{
+                click:function(){
+                    this.total ++;
+                },
+                alert:function(){
+                    alert('this is with alt key');
+                },
+                add:function(fruit){
+                    if(fruit.clicked){
+                        this.total -= fruit.cost;
+                        fruit.class = 'unselect';
+                    }
+                    else
+                    {
+                        this.total += fruit.cost;
+                        fruit.class = 'select';
+                    }
+                    fruit.clicked = !fruit.clicked;
+                }
+            }
+        });
+    </script>
+    <style>
+        .select{
+            background-color: #7badfc;
+        }
+        .unselect{
+            background-color: #fc7baa;
+        }
+    </style>
+</body>
+</html>

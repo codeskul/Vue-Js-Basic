@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+           <!-- <ul>
+               <li v-for='(value,index,key) in list'>{{key+1}} {{index}} {{value}}</li>
+           </ul> -->
+
+            <ul>
+                <li v-for='(value,index) in list'>{{index+1}} {{value}}</li>
+            </ul>
+           <div class="form-group col-lg-6">
+                <input type="text" class="form-control" v-model='newFruit'>
+                <button class="btn btn-info" @click='add'>Add Fruit</button>    
+           </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue ({
+            el : '#app',
+            data:{
+                //list:{
+                //    fruit1:'apple',
+                //    fruit2:'mango',
+                //    fruit3:'banana',
+                //    fruit4:'orange'
+                //},
+                list:[
+                    fruit='apple',
+                    fruit='mango',
+                    fruit='banana',
+                    fruit='orange'
+                ],
+                newFruit : ''
+            },
+            methods:{
+                add:function(){
+                    this.list.push(this.newFruit);
+                    this.newFruit = ''; 
+                }
+            }
+        });
+    </script>
+</body>
+</html>
